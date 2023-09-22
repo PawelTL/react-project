@@ -1,1 +1,7 @@
-Memory card game from The Odin Project, w.i.p
+Memory Card Game based on Project Odin's project
+
+During the making learned: 
+useState()
+useEffect()
+props
+use of APIs

@@ -14,7 +14,6 @@ function App() {
     const data = await response.json();
     setCurrentList([...data.Search])
     setMovies(data.Search);
-    if (data.Search === undefined) {console.log("NO")}
   };
   useEffect(() => {
     loadMovies(searchTerm);
@@ -28,7 +27,7 @@ function App() {
   const [isLost, setIsLost] = useState(false);
   const [currentScore, setCurrentScore] = useState(0);
   const [highScore, setHighScore] = useState(0);
-  const [popup, setPopup] = useState(false);
+  const [popup, setPopup] = useState(true);
 
   useEffect(() => {
     shuffleCards();
@@ -45,7 +44,7 @@ function App() {
         setClickedList([...temp])
         setCurrentScore(currentScore + 1)
         if (currentScore >= highScore) { setHighScore(currentScore + 1) }
-        if (currentScore === 9) {
+        if (currentScore === movies.length - 1) {
           setIsWon(true);
           setClickedList([])
           setPopup(true)
@@ -76,7 +75,7 @@ function App() {
 
   return (
     <div className='w-screen min-h-[100vh] p-8 bg-slate-600'>
-      <div className='flex w-[80vw] justify-between'>
+      <div className='flex mx-[15vw] w-[70vw] justify-between'>
         <h1 className='pb-8 text-4xl text-white'>Movie memory card game</h1>
         <span className='text-2xl text-white' onClick={handleCardClick}>Score: {currentScore} | Highest score: {highScore}</span>
       </div>
