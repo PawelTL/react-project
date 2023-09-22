@@ -4,7 +4,7 @@ import Card from './Card.jsx';
 import Popup from "./Popup.jsx"
 
 // 6decdd3a
-const API_URL = "http://www.omdbapi.com?apikey=6decdd3a";
+const API_URL = "https://www.omdbapi.com?apikey=6decdd3a";
 
 function App() {
   const [movies, setMovies] = useState([]);
