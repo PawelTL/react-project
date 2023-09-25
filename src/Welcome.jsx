@@ -1,5 +1,6 @@
 import {React, useState} from 'react'
 import { useLocation, Link } from 'react-router-dom';
+import transition from './Transition';
 
 function Welcome() {
 
@@ -23,4 +24,4 @@ function Welcome() {
     )
 }
 
-export default Welcome;
+export default transition(Welcome);

@@ -4,6 +4,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import App from './App.jsx'
 import './index.css'
 import Welcome from './Welcome.jsx'
+import Errorpage from './Errorpage.jsx'
+import { AnimatePresence } from 'framer-motion'
 
 const router = createBrowserRouter([
   {
@@ -13,12 +15,15 @@ const router = createBrowserRouter([
   {
     path: "/",
     index: true,
-    element: <Welcome />
+    element: <Welcome />,
+    errorElement: <Errorpage />,
   }
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <AnimatePresence mode='wait'>
+      <RouterProvider router={router} />
+    </AnimatePresence>
   </React.StrictMode>,
 )

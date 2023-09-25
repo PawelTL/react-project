@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link, Navigate, useLocation } from 'react-router-dom';
 import './App.css'
 import Card from './Card.jsx';
+import transition from './Transition';
 
 // 6decdd3a
 const API_URL = "https://www.omdbapi.com?apikey=6decdd3a";
@@ -67,8 +68,8 @@ function App() {
   return (
     <div className='w-screen min-h-[100vh] p-8 bg-slate-600'>
       <div className='flex mx-[15vw] w-[70vw] justify-between'>
-        <h1 className='pb-8 text-4xl text-white'>Movie memory card game -</h1><span className='font-semibold text-xl text-white w-[20vw]'> Click every card once. Be careful, they shuffle with every click.</span>
-        <span className='text-2xl text-white' onClick={handleCardClick}>Score: {currentScore} | Highest score: {highScore}</span>
+        <h1 className='pb-8 text-4xl text-white'>Movie memory card game -</h1><span className='font-semibold text-xl text-white w-[20vw]'> Click every card once.<br/> Be careful, they shuffle with every click.</span>
+        <span className='text-2xl text-white'>Score: {currentScore} | Highest score: {highScore}</span>
       </div>
       <div className='flex justify-evenly flex-wrap flex-auto gap-4 w-[75vw] mx-auto'>
         {movies.length > 0 ? movies.map((movie) => (
@@ -83,4 +84,4 @@ function App() {
 
   )
 }
-export default App
+export default transition(App)
