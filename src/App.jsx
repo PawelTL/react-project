@@ -11,18 +11,13 @@ function App() {
   const { state } = useLocation();
   const [movies, setMovies] = useState([]);
   const [searchTerm, setSearchTerm] = useState(state.search ? state.search : "batman");
+  const [gameState, setGameState] = useState([false, false, 0])
   const loadMovies = async (title) => {
     const response = await fetch(`${API_URL}&s=${title}`);
     const data = await response.json();
     setCurrentList([...data.Search])
     setMovies(data.Search);
   };
-  useEffect(() => {
-    loadMovies(searchTerm);
-    setHighScore(state.highScore)
-  }, []);
-
-
 
   const [clickedList, setClickedList] = useState([]);
   const [currentList, setCurrentList] = useState([]);
@@ -30,6 +25,15 @@ function App() {
   const [isLost, setIsLost] = useState(false);
   const [currentScore, setCurrentScore] = useState(0);
   const [highScore, setHighScore] = useState(0);
+
+  useEffect(() => {
+    loadMovies(searchTerm);
+    setHighScore(state.highScore)
+  }, []);
+
+  useEffect(() => {
+     setGameState([isWon, isLost, highScore])
+  }, [highScore, isLost, isWon])
 
   useEffect(() => {
     shuffleCards();
@@ -45,6 +49,7 @@ function App() {
         setClickedList([...temp])
         setCurrentScore(currentScore + 1)
         if (currentScore >= highScore) { setHighScore(currentScore + 1) }
+        console.log(highScore)
         if (currentScore === movies.length - 1) {
           setIsWon(true);
           setClickedList([])
@@ -79,7 +84,7 @@ function App() {
              <button type='button' className='border-2 border-black  bg-slate-100 w-[15vw] h-[6vw] text-5xl font-semibold'>Go back</button>
           </Link></div>}
       </div>
-      {isWon || isLost ? <Navigate to={"/"} state={[isWon, isLost, highScore]} /> : null}
+      {isWon || isLost ? <Navigate to={"/"} state={gameState} /> : null}
     </div>
 
   )
